@@ -1,28 +1,32 @@
 # Golang Assignment: Import and Manage Data
 
-### 🖍 Objective  
+### 📝 Objective
+
 This project is a Golang-based web application to **upload an Excel file**, **store its data in a MySQL database**, and **cache it in Redis**. It also provides a **CRUD API** for managing the imported data.
 
 ---
 
 ## ⚙️ Features
-- **Upload Excel File** (`POST /upload`): Asynchronous file processing in the background.  
-- **Fetch Records** (`GET /records`): Fetches data from Redis cache (if available) or MySQL.  
-- **Edit Record** (`PUT /records/:id`): Updates a specific record and refreshes the cache.  
-- **Redis Caching**: Caches data for 5 minutes to reduce database load.  
+
+- **Upload Excel File** (`POST /upload`): Asynchronous file processing in the background.
+- **Fetch Records** (`GET /records`): Fetches data from Redis cache (if available) or MySQL.
+- **Edit Record** (`PUT /records/:id`): Updates a specific record and refreshes the cache.
+- **Redis Caching**: Caches data for 5 minutes to reduce database load.
 
 ---
 
-## 🔧 Technologies Used
-- **Golang** (`gin` framework) – REST API  
-- **MySQL** – Relational database for storing records  
-- **Redis** – In-memory data store for caching  
-- **`excelize`** – Library for parsing `.xlsx` files  
-- **Docker (Optional)** – For easier setup  
+## 🛠️ Technologies Used
+
+- **Golang** (`gin` framework) – REST API
+- **MySQL** – Relational database for storing records
+- **Redis** – In-memory data store for caching
+- **`excelize`** – Library for parsing `.xlsx` files
+- **Docker (Optional)** – For easier setup
 
 ---
 
-## 🖂 Project Structure
+## 📂 Project Structure
+
 ```
 golang-assignment/
   ├── config/           # Database and Redis setup
@@ -37,23 +41,27 @@ golang-assignment/
 ## 🚀 Setup Instructions
 
 ### 1️⃣ Prerequisites
-- **Golang** (>= 1.16)  
-- **MySQL** (running on port `3306`)  
-- **Redis** (running on port `6379`)  
-- **Postman** (for testing APIs)  
+
+- **Golang** (>= 1.16)
+- **MySQL** (running on port `3306`)
+- **Redis** (running on port `6379`)
+- **Postman** (for testing APIs)
 
 ### 2️⃣ Clone the Repository
+
 ```bash
 git clone https://github.com/your-repo/golang-assignment.git
 cd golang-assignment
 ```
 
 ### 3️⃣ Install Dependencies
+
 ```bash
 go mod tidy
 ```
 
 ### 4️⃣ Configure MySQL and Redis
+
 - **MySQL**: Create a database called `golang_assignment` and a `records` table:
   ```sql
   CREATE DATABASE golang_assignment;
@@ -75,7 +83,24 @@ go mod tidy
   ```
 - **Redis**: Ensure Redis is running on `127.0.0.1:6379`.
 
-### 5️⃣ Run the Application
+### 5️⃣ Configure Database and Redis
+
+- **Database Configuration:** Open `config/db.go` and change the following line to match your **MySQL credentials**:
+  ```go
+  DB, err = sql.Open("mysql", "root:password@tcp(127.0.0.1:3306)/golang_assignment")
+  ```
+  Replace `root:password` with your MySQL username and password.
+
+- **Redis Configuration:** Ensure that Redis is running on `127.0.0.1:6379`. If you use a different port or host, update this line in `config/db.go`:
+  ```go
+  Redis = redis.NewClient(&redis.Options{
+      Addr: "127.0.0.1:6379",
+      DB:   0,
+  })
+  ```
+
+### 6️⃣ Run the Application
+
 ```bash
 go run main.go
 ```
@@ -85,12 +110,14 @@ go run main.go
 ## 🔍 API Documentation
 
 ### 1. Upload Excel File (`POST /upload`)
-- **Description**: Uploads an Excel file and processes it in the background.  
-- **Request**:  
-  - **Method**: `POST`  
+
+- **Description**: Uploads an Excel file and processes it in the background.
+- **Request**:
+  - **Method**: `POST`
   - **Body**: `form-data`, Key: `file` (upload a `.xlsx` file)
 
 **Example Response:**
+
 ```json
 { "message": "File is being processed" }
 ```
@@ -98,11 +125,13 @@ go run main.go
 ---
 
 ### 2. Fetch Records (`GET /records`)
-- **Description**: Fetches all records from Redis (if cached) or MySQL.  
-- **Request**:  
+
+- **Description**: Fetches all records from Redis (if cached) or MySQL.
+- **Request**:
   - **Method**: `GET`
 
 **Example Response:**
+
 ```json
 [
   {
@@ -124,10 +153,12 @@ go run main.go
 ---
 
 ### 3. Edit Record (`PUT /records/:id`)
-- **Description**: Updates a specific record in MySQL and refreshes the cache.  
-- **Request**:  
-  - **Method**: `PUT`  
+
+- **Description**: Updates a specific record in MySQL and refreshes the cache.
+- **Request**:
+  - **Method**: `PUT`
   - **Body**: `JSON`
+
 ```json
 {
   "first_name": "John",
@@ -144,6 +175,7 @@ go run main.go
 ```
 
 **Example Response:**
+
 ```json
 { "message": "Record updated successfully" }
 ```
@@ -151,20 +183,23 @@ go run main.go
 ---
 
 ## ⚠️ Error Handling
-- **400 Bad Request**: Invalid input or missing file.  
-- **500 Internal Server Error**: Database or cache errors.  
+
+- **400 Bad Request**: Invalid input or missing file.
+- **500 Internal Server Error**: Database or cache errors.
 
 ---
 
 ## 🛡️ Best Practices Implemented
-- **Asynchronous File Processing**: File is processed in the background without blocking the client.  
-- **Redis Caching**: Reduces database load by caching records for 5 minutes.  
-- **Structured Error Handling**: Ensures graceful failure handling and logging.  
+
+- **Asynchronous File Processing**: File is processed in the background without blocking the client.
+- **Redis Caching**: Reduces database load by caching records for 5 minutes.
+- **Structured Error Handling**: Ensures graceful failure handling and logging.
 
 ---
 
-## 🤝 Contributing
+## 🧑‍💻 Contributing
+
 Feel free to open an issue or submit a pull request!
 
----
+```
 
