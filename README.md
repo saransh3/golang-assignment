@@ -1,6 +1,3 @@
-# golang-assignment
-
-Golang Assignment: Import and Manage Data
 📝 Objective
 This project is a Golang-based web application to upload an Excel file, store its data in a MySQL database, and cache it in Redis. It also provides a CRUD API for managing the imported data.
 
@@ -138,5 +135,3 @@ Edit
 Asynchronous File Processing: File is processed in the background without blocking the client.
 Redis Caching: Reduces database load by caching records for 5 minutes.
 Structured Error Handling: Ensures graceful failure handling and logging.
-🧑‍💻 Contributing
-Feel free to open an issue or submit a pull request!
