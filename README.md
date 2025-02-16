@@ -163,25 +163,8 @@ go run main.go
 
 ---
 
-## 📚 Future Enhancements
-- Add file processing progress tracking.  
-- Implement batch inserts for better performance on large datasets.  
-- Create a `DELETE /cache` endpoint to manage Redis cache.
-
----
-
 ## 🤝 Contributing
 Feel free to open an issue or submit a pull request!
-
----
-
-## 📧 Contact
-If you have any questions, feel free to reach out at: `your-email@example.com`
-
----
-
-## 🖍 License
-MIT License. See `LICENSE` file for details.
 
 ---
 
